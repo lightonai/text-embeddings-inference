@@ -1129,9 +1129,9 @@ pub async fn run(
                 .route("/invocations", post(rerank))
         }
         ModelType::Embedding(_) => {
-            app.route("/", post(embed))
+            app.route("/", post(openai_embed))
                 // AWS Sagemaker route
-                .route("/invocations", post(embed))
+                .route("/invocations", post(openai_embed))
         }
     };
 
