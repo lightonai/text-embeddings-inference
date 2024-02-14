@@ -61,13 +61,12 @@ pub async fn start_server(model_id: String, revision: Option<String>, dtype: DTy
             None,
             None,
             None,
-            None,
         )
     });
 
     tokio::select! {
         err = server_task => err?,
         _ = check_health(8090, Duration::from_secs(60)) => Ok(())
-    }
+    }?;
     Ok(())
 }
