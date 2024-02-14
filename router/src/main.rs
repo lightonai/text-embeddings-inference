@@ -98,6 +98,10 @@ struct Args {
 
     #[clap(long, env)]
     otlp_endpoint: Option<String>,
+
+    /// Phantom parameter to be SageMaker compatible
+    #[clap(long, env)]
+    serve: Option<bool>,
 }
 
 #[tokio::main]
@@ -127,6 +131,7 @@ async fn main() -> Result<()> {
         Some(args.uds_path),
         args.huggingface_hub_cache,
         args.otlp_endpoint,
+        args.serve,
     )
     .await?;
 

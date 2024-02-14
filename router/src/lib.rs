@@ -51,6 +51,7 @@ pub async fn run(
     uds_path: Option<String>,
     huggingface_hub_cache: Option<String>,
     otlp_endpoint: Option<String>,
+    serve: Option<bool>,
 ) -> Result<()> {
     let model_id_path = Path::new(&model_id);
     let model_root = if model_id_path.exists() && model_id_path.is_dir() {
