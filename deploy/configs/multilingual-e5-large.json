@@ -1,0 +1,7 @@
+{
+    "model": "intfloat/multilingual-e5-large",
+    "image": "text-embedding-inference-custom",
+    "sagemaker_instance_type": "ml.g5.2xlarge",
+    "json_output": "true",
+    "port": "8080"
+}
