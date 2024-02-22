@@ -773,7 +773,7 @@ async fn openai_embed(
 
             let permit = infer.try_acquire_permit().map_err(ErrorResponse::from)?;
             let response = infer
-                .embed_pooled(input, false, true, permit)
+                .embed_pooled(input, true, true, permit)
                 .await
                 .map_err(ErrorResponse::from)?;
 
@@ -833,7 +833,7 @@ async fn openai_embed(
                 let local_infer = infer.clone();
                 futures.push(async move {
                     let permit = local_infer.acquire_permit().await;
-                    local_infer.embed_pooled(input, false, true, permit).await
+                    local_infer.embed_pooled(input, true, true, permit).await
                 })
             }
             let results = join_all(futures)
@@ -1130,9 +1130,9 @@ pub async fn run(
                 .route("/invocations", post(rerank))
         }
         ModelType::Embedding(_) => {
-            app.route("/", post(embed))
+            app.route("/", post(openai_embed))
                 // AWS Sagemaker route
-                .route("/invocations", post(embed))
+                .route("/invocations", post(openai_embed))
         }
     };
 
