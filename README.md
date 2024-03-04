@@ -27,6 +27,7 @@ length of 512 tokens:
 
 ## Table of contents
 
+- [Added modifications on this fork](#added-modifications-on-this-fork)
 - [Get Started](#get-started)
     - [Supported Models](#supported-models)
     - [Docker](#docker)
@@ -53,6 +54,12 @@ Ember, GTE and E5. TEI implements many features such as:
   and [cuBLASLt](https://docs.nvidia.com/cuda/cublas/#using-the-cublaslt-api)
 * [Safetensors](https://github.com/huggingface/safetensors) weight loading
 * Production ready (distributed tracing with Open Telemetry, Prometheus metrics)
+
+## Added modifications on this fork
+This forked version includes the following changes compared to the official repository:
+* The router is forwarding the requests sent to the `/invocations` endpoint to the `openai_embed()` method instead of the simple `embed()` one.
+* A modified Dockerfile which calls a bash script as entrypoint instead of the basic `text-embeddings-router`. The bash script checks if `serve` is given as parameter of `text-embeddings-router` and skipping it if that is the case.
+* Activated truncation for the `openai_embed()` method behind the `/embeddings` endpoint.
 
 ## Get Started
 
